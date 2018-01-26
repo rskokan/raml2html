@@ -1,6 +1,8 @@
 'use strict';
 
 const raml2obj = require('raml2obj');
+const fs = require('fs');
+const path = require('path');
 const pjson = require('./package.json');
 
 /**
@@ -48,6 +50,8 @@ function getDefaultConfig(mainTemplate, templatesPath) {
     // using the working directory since that might be anything
     templatesPath = __dirname;
   }
+
+  templatesPath = path.dirname(fs.realpathSync(mainTemplate));
 
   return {
     processRamlObj(ramlObj) {
